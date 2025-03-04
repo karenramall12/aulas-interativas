@@ -1,74 +1,105 @@
+// Sistema de Login
+function checkPassword() {
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('error-msg');
+    const content = document.querySelector('.content');
+    const loginContainer = document.querySelector('.login-container');
+
+    if(password === 'lua123') {
+        loginContainer.style.display = 'none';
+        content.style.display = 'block';
+        document.body.style.overflow = 'auto';
+        initMatrix();
+        initMenu();
+    } else {
+        errorMsg.textContent = 'Senha incorreta! Tente novamente.';
+        errorMsg.style.display = 'block';
+        document.getElementById('password').value = '';
+        setTimeout(() => errorMsg.style.display = 'none', 2000);
+    }
+}
+
 // Efeito Matrix
-const canvas = document.getElementById('matrix');
-const ctx = canvas.getContext('2d');
-let frame;
-
 function initMatrix() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const canvas = document.getElementById('matrix');
+    const ctx = canvas.getContext('2d');
     
-    const chars = 'HQbeds0123456789';
-    const drops = Array(Math.floor(canvas.width/24)).fill(0);
+    const resizeCanvas = () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    };
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
 
-    function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.1)'; // Aumentar a opacidade do fundo
+    const chars = 'HQbeds0123456789@#$%&';
+    const fontSize = 14;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = new Array(columns).fill(1);
+
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
-        ctx.fillStyle = '#ff0000'; // Alterar a cor do texto para um vermelho mais vivo
-        ctx.font = '16px monospace'; // Diminuir o tamanho das letras para 16px
+        ctx.fillStyle = '#ff0000';
+        ctx.font = `${fontSize}px monospace`;
 
         drops.forEach((drop, i) => {
             const char = chars[Math.floor(Math.random() * chars.length)];
-            ctx.fillText(char, i * 24, drop * 24);
-            
-            if(drop * 24 > canvas.height || Math.random() > 0.975) {
+            ctx.fillText(char, i * fontSize, drop * fontSize);
+
+            if(drop * fontSize > canvas.height && Math.random() > 0.975) {
                 drops[i] = 0;
             }
             drops[i]++;
         });
-    }
+    };
 
-    function animate() {
-        draw();
-        frame = setTimeout(animate, 100); // Diminuir a velocidade de atualização
-    }
-    
-    animate();
+    setInterval(draw, 50);
 }
 
-// Controles de Interface
-const menuBtn = document.querySelector('.menu-btn');
-const sidebar = document.querySelector('.sidebar');
+function initMenu() {
+    const menuBtn = document.querySelector('.menu-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const menuItems = document.querySelectorAll('.sidebar a'); // Seleciona os itens do menu
 
-menuBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('active');
-    menuBtn.classList.toggle('active');
-});
+    // Fixar o menu
+    sidebar.style.position = 'fixed';
+    sidebar.style.top = '0';
+    sidebar.style.left = '0';
+    sidebar.style.height = '100%';
 
-document.addEventListener('click', (e) => {
-    if(!sidebar.contains(e.target) && !menuBtn.contains(e.target)) {
-        sidebar.classList.remove('active');
-        menuBtn.classList.remove('active');
-    }
-});
-
-// Carregamento Otimizado
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) {
-            const iframe = entry.target;
-            iframe.src = iframe.dataset.src + '&autoplay=0&mute=1';
-            observer.unobserve(iframe);
+    console.log('menuBtn:', menuBtn); // Adicionado para depuração
+    console.log('sidebar:', sidebar); // Adicionado para depuração
+    // Fechar menu ao clicar fora ou no documento
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && e.target !== menuBtn) {
+            sidebar.classList.remove('active');
         }
     });
-}, { threshold: 0.25 });
 
-document.querySelectorAll('iframe').forEach(iframe => {
-    observer.observe(iframe);
+    // Fechar menu ao clicar em uma opção
+    menuItems.forEach(item => {
+        item.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+        });
+    });
+}
+
+// Event Listeners
+document.getElementById('password').addEventListener('keypress', (e) => {
+    if(e.key === 'Enter') checkPassword();
 });
 
-// Inicialização
 document.addEventListener('DOMContentLoaded', () => {
-    initMatrix();
-    window.addEventListener('resize', initMatrix);
+    document.addEventListener('contextmenu', (e) => e.preventDefault());
+    
+    document.onkeydown = (e) => {
+        if(e.keyCode == 123 || (e.ctrlKey && e.shiftKey && [73,74].includes(e.keyCode))) {
+            return false;
+        }
+    };
+
+    // Inicializar o menu ao carregar a página
+    initMenu();
 });

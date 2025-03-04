@@ -9,7 +9,17 @@
 <body>
     <canvas id="matrix"></canvas>
 
-    <div class="menu-btn">
+    <!-- Tela de Login -->
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Acesso Restrito</h2>
+            <input type="password" id="password" placeholder="Digite a senha">
+            <button onclick="checkPassword()">Acessar</button>
+            <p id="error-msg" class="error"></p>
+        </div>
+    </div>
+
+    <div class="menu-btn" onclick="toggleMenu()">
         <span></span>
         <span></span>
         <span></span>
@@ -25,53 +35,34 @@
         </ul>
     </nav>
 
-    <main class="content">
+    <main class="content" style="display: none;">
         <section class="hero">
-            <h1>HQbeds Academy</h1>
-            <p>Tutoriais Profissionais para Gestão Hoteleira</p>
+            <h1 class="title">HQbeds Academy</h1>
+            <p class="subtitle">Tutoriais Profissionais para Gestão Hoteleira</p>
         </section>
 
         <!-- Seção Operacional -->
         <section class="video-section" id="operacional">
             <h2>Gestão Operacional</h2>
             <div class="video-carousel">
+                <!-- Vídeos repetidos removidos - manter apenas únicos -->
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/5tKgLm8xYyU?si=5FHvUZ4G6X6LkzWg" title="Gestão de Reservas" allowfullscreen loading="lazy"></iframe>
+                        <iframe src="https://www.youtube.com/embed/eB6txyhHFG4" title="Gestão de Reservas" allowfullscreen loading="lazy"></iframe>
                     </div>
-                    
                     <h3>Gestão de Reservas</h3>
                 </div>
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/vX35jJ-NpdQ?si=K4VJd5wBwZz3n1rR" title="Controle de Estoque" allowfullscreen loading="lazy"></iframe>
+                        <iframe src="https://www.youtube.com/embed/vX35jJ-NpdQ" title="Controle de Estoque" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <h3>Controle de Estoque</h3>
                 </div>
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/8KlqHjsDdEw?si=HfzTZtL8FJ9Jkqy4" title="Limpeza e Manutenção" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Limpeza e Manutenção</h3>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/5tKgLm8xYyU?si=5FHvUZ4G6X6LkzWg" title="Gestão de Reservas" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Gestão de Reservas</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/vX35jJ-NpdQ?si=K4VJd5wBwZz3n1rR" title="Controle de Estoque" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Controle de Estoque</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/8KlqHjsDdEw?si=HfzTZtL8FJ9Jkqy4" title="Limpeza e Manutenção" allowfullscreen loading="lazy"></iframe>
+                        <iframe src="https://www.youtube.com/embed/8KlqHjsDdEw" title="Limpeza e Manutenção" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <h3>Limpeza e Manutenção</h3>
                 </div>
@@ -84,39 +75,14 @@
             <div class="video-carousel">
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/pXRviuL6vMY?si=7hNnDf6Z6X3Jk9w5" title="Check-in Automático" allowfullscreen loading="lazy"></iframe>
+                        <iframe src="https://www.youtube.com/embed/pXRviuL6vMY" title="Check-in Automático" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <h3>Check-in Automático</h3>
                 </div>
 
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/3JluqDehuNA?si=4WX7N6f9Z6vJk9w5" title="Check-in Grupos" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Check-in para Grupos</h3>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/pXRviuL6vMY?si=7hNnDf6Z6X3Jk9w5" title="Check-in Automático" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Check-in Automático</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/3JluqDehuNA?si=4WX7N6f9Z6vJk9w5" title="Check-in Grupos" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Check-in para Grupos</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/pXRviuL6vMY?si=7hNnDf6Z6X3Jk9w5" title="Check-in Automático" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Check-in Automático</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/3JluqDehuNA?si=4WX7N6f9Z6vJk9w5" title="Check-in Grupos" allowfullscreen loading="lazy"></iframe>
+                        <iframe src="https://www.youtube.com/embed/3JluqDehuNA" title="Check-in Grupos" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <h3>Check-in para Grupos</h3>
                 </div>
@@ -129,48 +95,21 @@
             <div class="video-carousel">
                 <div class="video-card">
                     <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/yt7v6xZPy5U?si=K4VJd5wBwZz3n1rR" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
-                        
-                    </div>
-                    <h3>Integração PMS</h3>
-                </div>
-
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/yt7v6xZPy5U?si=K4VJd5wBwZz3n1rR" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Integração PMS</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/yt7v6xZPy5U?si=K4VJd5wBwZz3n1rR" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Integração PMS</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/yt7v6xZPy5U?si=K4VJd5wBwZz3n1rR" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Integração PMS</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/yt7v6xZPy5U?si=K4VJd5wBwZz3n1rR" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
-                    </div>
-                    <h3>Integração PMS</h3>
-                </div>
-                <div class="video-card">
-                    <div class="video-thumbnail">
-                        <iframe data-src="https://www.youtube.com/embed/yt7v6xZPy5U?si=K4VJd5wBwZz3n1rR" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
+                        <iframe src="https://www.youtube.com/embed/yt7v6xZPy5U" title="Integração PMS" allowfullscreen loading="lazy"></iframe>
                     </div>
                     <h3>Integração PMS</h3>
                 </div>
             </div>
-            
         </section>
 
     </main>
 
     <script src="script.js"></script>
+    <script>
+        function toggleMenu() {
+            const sidebar = document.querySelector('.sidebar');
+            sidebar.classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
